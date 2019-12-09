@@ -1,0 +1,6 @@
+#Esto es un comentario
+#Usamos este fichero para ignorar todo lo que no queremos sincronizar con git.
+/target/
+/.classpath
+/.settings
+

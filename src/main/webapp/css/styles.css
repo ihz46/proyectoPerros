@@ -1,0 +1,41 @@
+/* HOJA DE ESTILOS PERSONALIZADA */
+
+body{
+	font-family: 'Calistoga', cursive;
+}
+
+main{
+	background-color: #D8F0B9;
+}
+
+
+
+.info-user{
+	width:100%;
+	min-height: 10vh;
+	background-color:#A4EE45;
+	position:relative;
+}
+
+.info-user img{
+	height: 80px;
+    width: 80px;
+    position: absolute;
+    top: 1px;
+    margin: 2px;
+}
+
+.info-user p{
+	font-size:2rem;
+	text-align:center;
+	margin-top:20px;
+	text-transform: uppercase;
+}
+
+.fa-times-circle{
+	color: red;
+    font-size: 5.2rem;
+    position: absolute;
+    bottom: 2px;
+    right:1px;
+}
