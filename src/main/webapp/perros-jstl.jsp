@@ -38,7 +38,8 @@
 <h2>Formulario</h2>
 
 <c:if test="${empty perroEditar}">
-No hay ningún perro
+	No hay ningún perro para editar, vamos a inicializarlo.
+	<jsp:useBean id="perroEditar" class="com.ipartek.formacion.model.pojo.Perro"></jsp:useBean>
 </c:if>
 
 		
