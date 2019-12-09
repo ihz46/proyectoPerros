@@ -1,3 +1,8 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@page import="com.ipartek.formacion.model.pojo.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -15,6 +20,9 @@
 	 
 	 <!-- FONT-AWESOME -->
 	 <link rel = "stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+	 
+	 <!-- DATATABLES -->
+	 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 	 
 	 <!-- OWN CSS STYLES -->
 	 <link rel="stylesheet" href="css/styles.css?time=<%=System.currentTimeMillis()%>">

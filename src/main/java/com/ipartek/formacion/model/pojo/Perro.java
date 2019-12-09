@@ -18,7 +18,7 @@ public class Perro {
 	public Perro(String nombre) {
 		this();
 		this.nombre = nombre;
-	}
+	}   
 	
 	public Perro(int id, String nombre) {
 		this();
