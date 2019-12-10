@@ -3,7 +3,7 @@
 <%@page import="java.util.ArrayList"%>
 
 <%@include file="includes/header.jsp" %>
-<%@include file="includes/navigation.jsp" %>
+
 
 
 <h1>Perros</h1>

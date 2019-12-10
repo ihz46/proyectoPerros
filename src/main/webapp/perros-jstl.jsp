@@ -1,7 +1,7 @@
 <%String titulo = "Perros | PerrosJSTL"; %>
 
 <%@include file="includes/header.jsp" %>
-<%@include file="includes/navigation.jsp" %>
+
 
 
 <h1>Perros con JSTL</h1>

@@ -1,6 +1,6 @@
 <%String titulo = "Perros | Login"; %>
 <%@include file="includes/header.jsp" %>
-<%@include file="includes/navigation.jsp" %>
+
 
 
 <form name="formulario" action="login" method="post">

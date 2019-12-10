@@ -5,21 +5,32 @@ body{
 }
 
 main{
-	background-color: #D8F0B9;
+	background-color: #D8ECF0;
 }
 
+nav{
+	background-color:#83B4FF;
+}
 
+.pie{
+	background-color:#007bff;
+	margin-top:30px;
+	min-height:50px;
+	text-align:center;
+	
+}
 
 .info-user{
 	width:100%;
 	min-height: 10vh;
 	background-color:#A4EE45;
 	position:relative;
+	margin-bottom:10px;
 }
 
 .info-user img{
-	height: 80px;
-    width: 80px;
+	height: 50px;
+    width: 50px;
     position: absolute;
     top: 1px;
     margin: 2px;
@@ -34,8 +45,17 @@ main{
 
 .fa-times-circle{
 	color: red;
-    font-size: 5.2rem;
+    font-size: 3.2rem;
     position: absolute;
     bottom: 2px;
     right:1px;
+}
+
+.usuarios{
+	background-color: #007bff;
+    color: white;
+    padding: 7px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 5px;
 }

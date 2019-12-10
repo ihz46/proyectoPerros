@@ -1,6 +1,5 @@
 <%String titulo = "Perros | Inicio"; %>
 <%@include file="includes/header.jsp" %>
-<%@include file="includes/navigation.jsp" %>
 
 <%
 	
