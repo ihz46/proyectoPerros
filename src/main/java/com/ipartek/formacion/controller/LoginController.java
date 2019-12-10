@@ -67,7 +67,7 @@ public class LoginController extends HttpServlet {
 					
 			//Le enviamos a la página de perros
 			
-			response.sendRedirect("perros");
+			response.sendRedirect("private/home");
 			
 		}else {
 			

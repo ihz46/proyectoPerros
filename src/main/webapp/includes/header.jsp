@@ -46,7 +46,9 @@
     <a class="nav-link" href="moodleForm.jsp">Moodle</a>
   </li>
   <li class="nav-item">
-  	<p class="usuarios">Usuarios Conectados ${applicationScope.numeroUsuariosConectados}</p>
+  	<a class="nav-link" href="perros">Perros</a>
+  <li class="nav-item">
+  	<p class="usuarios">Usuarios Conectados: ${applicationScope.numeroUsuariosConectados}</p>
   </li>
   
   
@@ -74,5 +76,6 @@
 	
 	
 </header>
-<div class="container">
+
 <main>
+<div class="container">

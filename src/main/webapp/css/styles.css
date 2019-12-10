@@ -4,12 +4,12 @@ body{
 	font-family: 'Calistoga', cursive;
 }
 
-main{
-	background-color: #D8ECF0;
-}
-
 nav{
 	background-color:#83B4FF;
+}
+
+form{
+	padding:20px;
 }
 
 .pie{
@@ -18,6 +18,19 @@ nav{
 	min-height:50px;
 	text-align:center;
 	
+}
+
+
+header{
+	min-height: 10vh;
+    margin: 5px;
+    text-transform:uppercase;
+   
+}
+
+footer{
+	margin-top: 13px;
+    display: inline-block;
 }
 
 .info-user{
@@ -52,10 +65,22 @@ nav{
 }
 
 .usuarios{
-	background-color: #007bff;
-    color: white;
+	color: #007bff;
     padding: 7px;
     box-sizing: border-box;
-    border: 1px solid black;
     border-radius: 5px;
+    position: absolute;
+    right: 5px;
+    top: 8px;
+     
+}
+
+.container{
+	background-color: #D8ECF0;
+}
+
+header ul{
+	background-color: #D8ECF0;
+    border: 2px solid #007bff;
+    border-radius: 8px;
 }
