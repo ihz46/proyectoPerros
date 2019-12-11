@@ -63,6 +63,12 @@
 					<img  src="${usuarioLogueado.imagen }" alt="logo del usuario">		
 					<a href="logout"><i class="fas fa-times-circle"></i></a>
 			</div>
+			<p>Numero de intrusiones: ${applicationScope.numeroIntrusiones }</p>
+			
+				<c:forEach items="${applicationScope.hashSetDireccionesIP}" var="direccionIp">
+					<p>direccionIp</p>
+				</c:forEach>
+			
 		</c:if>
 		 
 			

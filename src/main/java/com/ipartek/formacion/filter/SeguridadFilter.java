@@ -1,13 +1,18 @@
 package com.ipartek.formacion.filter;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -27,7 +32,8 @@ import com.ipartek.formacion.controller.PerrosController;
 		DispatcherType.ERROR }, urlPatterns = { "/SeguridadFilter", "/private/*" })
 public class SeguridadFilter implements Filter {
 	private final static Logger LOG = Logger.getLogger(SeguridadFilter.class);
-
+	
+	
 	/**
 	 * @see Filter#destroy()
 	 */
@@ -44,16 +50,41 @@ public class SeguridadFilter implements Filter {
 		HttpServletResponse resp = (HttpServletResponse) response;
 
 		HttpSession session = req.getSession();
-
+		
 		if (session.getAttribute("usuarioLogueado") == null) {
-
+			
+			//Obtenemos el contexto de la aplicacion
+			ServletContext sc = request.getServletContext();
+			
+			//Obtenemos el valor del atributo numeroIntrusiones y lo guardamos en una variable
+			int contadorIntrusos = (int) sc.getAttribute("numeroIntrusiones");
+			contadorIntrusos++;
+			
+			//Actualizamos el valor del atributo numeroIntrusiones
+			sc.setAttribute("numeroIntrusiones", contadorIntrusos);
+			
+			//Obtenemos el set hashSetDireccionesIP y lo guardamos
+			Set<String> hashSetDireccionesIP = (Set<String>) sc.getAttribute("hashSetDireccionesIP");
+			
+			//Obtenemos la dirección ip de intrusos
+			
+			String direccionIp = req.getRemoteAddr();
+			
+			//Añadimos al hashset la direccionIp
+			hashSetDireccionesIP.add(direccionIp);
+			
+			//Actualizamos el hashset de direcciones ip en el contexto de la aplicación
+			sc.setAttribute("hashSetDireccionesIP", hashSetDireccionesIP);
+			
+						
+			
 			LOG.warn("Intrusión no deseada");
-
+			
 			LOG.debug("RequestURL: " + req.getRequestURL());
 			LOG.debug("RequestURI: " + req.getRequestURI());
 			LOG.debug("Remote Host: " + req.getRemoteHost());
 			LOG.debug("Remote Address: " + req.getRemoteAddr());
-
+			
 			Map<String, String[]> map = request.getParameterMap();
 			for (Object key : map.keySet()) {
 
