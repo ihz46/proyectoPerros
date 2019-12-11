@@ -1,6 +1,8 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -35,9 +37,18 @@ public class LogoutController extends HttpServlet {
 		session.invalidate();
 		session=null;
 		
+		
+		//Construimos el mensaje, cambiando espacio por %20
+		
+	    String mensaje = URLEncoder.encode("Muchas gracias por su visita", StandardCharsets.UTF_8.toString());
+		
+	    
+	    //Con esto indicamos la base del proyecto
+		String base = request.getContextPath();
+		
 		//Redirigimos al login
 		
-		response.sendRedirect("login.jsp");
+		response.sendRedirect(base + "/login.jsp?mensaje=" + mensaje);
 		
 	}
 

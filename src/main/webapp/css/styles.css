@@ -1,5 +1,10 @@
 /* HOJA DE ESTILOS PERSONALIZADA */
 
+h1,h2,h3,h4,h5,h6{
+	text-align:center;
+	color:#007bff;
+}
+
 body{
 	font-family: 'Calistoga', cursive;
 }
@@ -11,15 +16,6 @@ nav{
 form{
 	padding:20px;
 }
-
-.pie{
-	background-color:#007bff;
-	margin-top:30px;
-	min-height:50px;
-	text-align:center;
-	
-}
-
 
 header{
 	min-height: 10vh;
@@ -33,10 +29,21 @@ footer{
     display: inline-block;
 }
 
+.pie{
+	background-color:#007bff;
+	margin-top:30px;
+	min-height:50px;
+	text-align:center;
+	
+}
+
+
+
+
 .info-user{
 	width:100%;
 	min-height: 10vh;
-	background-color:#A4EE45;
+	background-color: #46B1C9;
 	position:relative;
 	margin-bottom:10px;
 }

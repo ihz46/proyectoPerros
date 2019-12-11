@@ -5,14 +5,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@page import="com.ipartek.formacion.model.pojo.Usuario"%>
+
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" type="image/jpg" href="images/icons/logoIpartekWeb.jpg" />
-	 <base href="/perros/"></base>
+	<link rel="icon" type="image/png" href="img/dog.png" />
+	  <base href="${pageContext.request.contextPath}/"></base>
+	 <!--<base href="/perros/"></base>  -->
 	 <title><%=titulo%></title>
 	 
 	 <!-- FUENTES -->
@@ -53,23 +57,14 @@
   
   
 </ul>
-		 <%
-			//Obtenemos los datos del usuario para pintar en el JSP.
-			Usuario user = (Usuario) session.getAttribute("usuarioLogueado");
-			//En caso de que no haya ningún dato, no pintamos nada
-			if(user==null){
-				user = new Usuario();
-			}else{%>
-				<div class="info-user">
-				<p>Bienvenido <%=user.getNombre()%> </p>
-				<img  src="<%=user.getImagen()%>" alt="logo del usuario">		
-				<a href="logout"><i class="fas fa-times-circle"></i></a>
+		<c:if test="${not empty usuarioLogueado }">
+			<div class="info-user">
+					<p>Bienvenido ${usuarioLogueado.nombre} </p>
+					<img  src="${usuarioLogueado.imagen }" alt="logo del usuario">		
+					<a href="logout"><i class="fas fa-times-circle"></i></a>
 			</div>
-			<%} %>
-			
-				
-				<!-- Con esto podemos obtener el número de usuarios que se han logueado 
-				<p>Usuarios Conectados ${applicationScope.numeroUsuariosConectados}</p>-->
+		</c:if>
+		 
 			
 		
 		

@@ -34,6 +34,11 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//Descomentar para ver fallo.
+		//int infinito = 5/0;
+		
+		
 		//1. Recibimos los parámetros 
 				String nombre= (String) request.getParameter("nombre");
 				String password = (String) request.getParameter("password");
@@ -65,9 +70,10 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("usuarioLogueado", usuario);
 			
 					
-			//Le enviamos a la página de perros
+			//Le enviamos a la página index.jsp 
 			
-			response.sendRedirect("private/home");
+			String base = request.getContextPath();
+			response.sendRedirect(base + "/private/home");
 			
 		}else {
 			
