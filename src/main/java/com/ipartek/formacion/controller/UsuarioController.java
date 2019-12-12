@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.taglibs.standard.tag.common.core.ForEachSupport;
+
 import com.ipartek.formacion.model.pojo.Usuario;
 
 /**
@@ -34,7 +36,12 @@ public class UsuarioController extends HttpServlet {
 		String nombre = (String) request.getParameter("nombre");
 		String email = (String) request.getParameter("email");
 		String[] opcionesSeleccionadas = request.getParameterValues("checkbox");
-		
+		if (opcionesSeleccionadas.length ==0) {
+			request.setAttribute("nombre", nombre);
+			request.setAttribute("email", email);
+			request.setAttribute("mensaje", "Debes de elegir al menos 3 deportes.");
+			request.getRequestDispatcher("formUser.jsp").forward(request, response);
+		}
 		List<String> listaOpciones =  Arrays.asList(opcionesSeleccionadas);
 		
 		
@@ -45,17 +52,28 @@ public class UsuarioController extends HttpServlet {
 		
 		//Comprobamos que sea válido el email
 		if (validarEmail(email) && nombre.length()>1) {
-			//Añadimos el nuevo usuario como atributo de la peticion
-			request.setAttribute("usuario", user);
-			
-			//También sus opciones
-			
-			request.setAttribute("listaOpciones", listaOpciones);
-			
-			request.getRequestDispatcher("usuarios.jsp").forward(request, response);
-			
+			if (validarDeportes(listaOpciones)) {
+				//Añadimos el nuevo usuario como atributo de la peticion
+				request.setAttribute("usuario", user);
+				
+				//También sus opciones
+				
+				request.setAttribute("listaOpciones", listaOpciones);
+				
+				request.getRequestDispatcher("usuarios.jsp").forward(request, response);
+			}else {
+				request.setAttribute("nombre", nombre);
+				request.setAttribute("email", email);
+				request.setAttribute("listaOpciones", listaOpciones);
+				request.setAttribute("mensaje", "Debes de elegir al menos 3 deportes.");
+				request.getRequestDispatcher("formUser.jsp").forward(request, response);
+			}
+		
 		}else {
-			request.setAttribute("mensaje", "Debes introducir un email y un nombre válido");
+			request.setAttribute("nombre", nombre);
+			request.setAttribute("email", email);
+			request.setAttribute("listaOpciones", listaOpciones);
+			request.setAttribute("mensaje", "Debes introducir un email y un nombre válido.");
 			request.getRequestDispatcher("formUser.jsp").forward(request, response);
 		}
 		
@@ -63,6 +81,14 @@ public class UsuarioController extends HttpServlet {
 		
 	}
 	
+	
+	private boolean validarDeportes(List<String> listaDeportes) {
+		if (listaDeportes != null && listaDeportes.size() >=3) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 	private boolean validarEmail(String email) {
 		Pattern pattern = Pattern
                 .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -77,5 +103,8 @@ public class UsuarioController extends HttpServlet {
 		
 		
 	}
+	
+	
+	
 
 }

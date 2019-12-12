@@ -1,6 +1,8 @@
 package com.ipartek.formacion.listener;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.ServletContext;
@@ -34,6 +36,21 @@ public class AppListener implements ServletContextListener {
        
        //Añadimos los atributos con valor predeterminado a 0.
        sc.setAttribute("numeroUsuariosConectados", 0);
+       
+       //Creamos el ArrayList y lo rellenamos con deportes
+       List<String> listaDeportes = new ArrayList<String>();
+       
+       listaDeportes.add("futbol");
+       listaDeportes.add("baloncesto");
+       listaDeportes.add("boxeo");
+       listaDeportes.add("voleibol");
+       listaDeportes.add("beisbol");
+       listaDeportes.add("surf");
+       listaDeportes.add("hockey");
+       
+       //Agregamos la lista al contexto de la aplicación, para poder acceder luego a el desde cualquier sitio.
+       
+       sc.setAttribute("listaDeportes", listaDeportes);
      
     }
    
