@@ -6,15 +6,17 @@ public class Usuario {
 	private String password;
 	private String github;
 	private String imagen;
+	private String email;
 	
 	//Constructor completo
-	public Usuario(int id, String nombre, String password, String github, String imagen) {
+	public Usuario(int id, String nombre, String password, String github, String imagen, String email) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.password = password;
 		this.github = github;
 		this.imagen = imagen;
+		this.email = email;
 	}
 
 	//Constructor vacío
@@ -25,6 +27,13 @@ public class Usuario {
 		this.password="";
 		this.github = "";
 		this.imagen="";
+		
+	}
+	
+	public Usuario(String nombre, String email) {
+		super();
+		this.nombre="";
+		this.email="";
 		
 	}
 
@@ -75,6 +84,14 @@ public class Usuario {
 	public String toString() {
 		return "Usuario [id=" + id + ", nombre=" + nombre + ", password=" + password + ", github=" + github
 				+ ", imagen=" + imagen + "]";
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

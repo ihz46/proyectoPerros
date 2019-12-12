@@ -32,7 +32,16 @@ import com.ipartek.formacion.controller.PerrosController;
 		DispatcherType.ERROR }, urlPatterns = { "/SeguridadFilter", "/private/*" })
 public class SeguridadFilter implements Filter {
 	private final static Logger LOG = Logger.getLogger(SeguridadFilter.class);
+
 	
+	/**
+	 * @see Filter#init(FilterConfig)
+	 */
+	public void init(FilterConfig fConfig) throws ServletException {
+		LOG.trace("init filter");
+		fConfig.getServletContext().setAttribute("numeroIntrusiones",0);
+	    fConfig.getServletContext().setAttribute("hashSetDireccionesIP", new HashSet<String>());
+	}
 	
 	/**
 	 * @see Filter#destroy()
@@ -60,21 +69,23 @@ public class SeguridadFilter implements Filter {
 			int contadorIntrusos = (int) sc.getAttribute("numeroIntrusiones");
 			contadorIntrusos++;
 			
+			LOG.debug(contadorIntrusos);
+			
 			//Actualizamos el valor del atributo numeroIntrusiones
 			sc.setAttribute("numeroIntrusiones", contadorIntrusos);
 			
 			//Obtenemos el set hashSetDireccionesIP y lo guardamos
-			Set<String> hashSetDireccionesIP = (Set<String>) sc.getAttribute("hashSetDireccionesIP");
+			HashSet<String> ips = (HashSet<String>) sc.getAttribute("hashSetDireccionesIP");
 			
 			//Obtenemos la dirección ip de intrusos
 			
 			String direccionIp = req.getRemoteAddr();
 			
 			//Añadimos al hashset la direccionIp
-			hashSetDireccionesIP.add(direccionIp);
+			ips.add(direccionIp);
 			
 			//Actualizamos el hashset de direcciones ip en el contexto de la aplicación
-			sc.setAttribute("hashSetDireccionesIP", hashSetDireccionesIP);
+			sc.setAttribute("hashSetDireccionesIP", ips);
 			
 						
 			
@@ -98,11 +109,6 @@ public class SeguridadFilter implements Filter {
 
 	}
 
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
-	public void init(FilterConfig fConfig) throws ServletException {
-		LOG.trace("init filter");
-	}
+	
 
 }

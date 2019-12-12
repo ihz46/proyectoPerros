@@ -20,7 +20,7 @@ import com.ipartek.formacion.controller.PerrosController;
 public class AppListener implements ServletContextListener {
 	
 	private final static Logger LOG = Logger.getLogger(AppListener.class);
-	Set<String> hashSetDireccionesIP = new HashSet<String>();
+	
 	
 
     public void contextInitialized(ServletContextEvent sce)  { 
@@ -34,8 +34,7 @@ public class AppListener implements ServletContextListener {
        
        //Añadimos los atributos con valor predeterminado a 0.
        sc.setAttribute("numeroUsuariosConectados", 0);
-       sc.setAttribute("numeroIntrusiones",0);
-       sc.setAttribute("hashSetDireccionesIP", hashSetDireccionesIP);
+     
     }
    
 	
