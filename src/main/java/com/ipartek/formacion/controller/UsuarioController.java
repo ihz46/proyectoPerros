@@ -71,8 +71,18 @@ public class UsuarioController extends HttpServlet {
 						request.setAttribute("listaOpciones", listaOpciones);
 						
 						//Y su sexo
+						switch (sexo) {
+						case "h":
+							request.setAttribute("sexo", "hombre");
+							break;
+						case "m":
+							request.setAttribute("sexo", "mujer");
+							break;
+						case "i":
+							request.setAttribute("sexo", "indefinido");
+							
+							break;						}
 						
-						request.setAttribute("sexo", sexo);
 						
 						request.getRequestDispatcher("usuarios.jsp").forward(request, response);
 					}else {
