@@ -47,6 +47,12 @@ public class AppListener implements ServletContextListener {
        listaDeportes.add("beisbol");
        listaDeportes.add("surf");
        listaDeportes.add("hockey");
+       listaDeportes.add("rugby");
+       listaDeportes.add("skeleton");
+       listaDeportes.add("atletismo");
+       listaDeportes.add("natacion sincronizada");
+       listaDeportes.add("tenis");
+       
        
        //Agregamos la lista al contexto de la aplicación, para poder acceder luego a el desde cualquier sitio.
        

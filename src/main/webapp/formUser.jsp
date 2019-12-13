@@ -58,6 +58,16 @@
 					</div>
 				</c:forEach>
 				
+					<div class="form-group col md-6">
+						<select class="form-control" name="sexo">
+								<option value="h" ${ (sexo eq 'h') ?"selected":""}>Hombre</option>
+								<option value="m" ${ (sexo eq 'm') ?"selected":""}>Mujer</option>
+								<option value="i" ${ (sexo eq 'i') ?"selected":""}>Indefinido</option>
+						
+						</select>
+					
+					</div>
+				
 				<button type="submit" class="btn btn-primary">Enviar</button>
 			
 			

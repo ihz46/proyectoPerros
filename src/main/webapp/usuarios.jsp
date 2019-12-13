@@ -6,7 +6,7 @@
 
 <p>Nombre: ${usuario.nombre}</p>
 <p>Email: ${usuario.email}</p>
-
+<p>Sexo: ${sexo }
 <ol>
 	<c:forEach items="${listaOpciones}" var="opcion">
 		<li>${opcion}</li>
