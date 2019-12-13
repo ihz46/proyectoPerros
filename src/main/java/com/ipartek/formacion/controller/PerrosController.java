@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.formacion.model.ArrayPerroDAO;
 import com.ipartek.formacion.model.pojo.Perro;
 
 /**
@@ -24,8 +25,7 @@ public class PerrosController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String mensaje= "";
 	private final static Logger log = Logger.getLogger(PerrosController.class);
-	private ArrayList<Perro> perros = new ArrayList<Perro>();
-    private int indice=0;
+	private static ArrayPerroDAO dao = ArrayPerroDAO.getInstance();
     
    
 	
@@ -41,12 +41,17 @@ public class PerrosController extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		log.trace("Método init, se ejecuta la primera vez que se llama al servlet y nunca más.");
 		super.init(config);
-		perros.add( new Perro(1,"bubba") );
-		perros.add( new Perro(2,"rataplan") );
-		perros.add( new Perro(3,"mosca") );
-		perros.add( new Perro(4,"txakur") );
-		perros.add( new Perro(5,"lagun") );
-		indice=6;
+		try {
+			dao.create( new Perro("bubba") );
+			dao.create( new Perro("rataplan") );
+			dao.create( new Perro("mosca") );
+			dao.create( new Perro("txakur") );
+			dao.create( new Perro("lagun") );
+			
+		} catch (Exception e) {
+			log.warn(e.getMessage());
+		}
+		
 		
 	}
 	
@@ -54,7 +59,7 @@ public class PerrosController extends HttpServlet {
 	public void destroy() {
 		log.debug("Se ejecuta solo una vez cuando se para el servidor de aplicaciones");
 		super.destroy();
-		perros=null;
+		
 	}
 	
 	@Override
@@ -67,7 +72,7 @@ public class PerrosController extends HttpServlet {
 		log.warn("Se ejecuta después del doGet o doPost");
 		
 		request.setAttribute("mensaje", mensaje);
-		request.setAttribute("perros", perros);
+		request.setAttribute("perros", dao.getAll());
 		request.getRequestDispatcher("perros.jsp").forward(request, response);
 	}
 	/**
@@ -85,24 +90,27 @@ public class PerrosController extends HttpServlet {
 		
 		if (id>0) {
 			//buscamos perro en array;
-			Perro perro = null;
-				for (Perro p : perros) {
-					if(p.getId() == id) {
-						perro = p;
-						break;
-					}
+			Perro perro = dao.getById(id);
+				
+						
+			if (adoptar) {
+				try {
+					dao.delete(id);
+					mensaje = "Ya has adoptado al perro, gracias por ayudar.";
+					log.info("Se ha adoptado el perro " + perro.getNombre());
+				} catch (Exception e) {
+					log.info("No se puede eliminar el perro");
 				}
 				
-				
-			
-			if (adoptar) {
-				perros.remove(perro);
-				mensaje = "Ya has adoptado al perro, gracias por ayudar.";
-				log.info("Se ha adoptado el perro " + perro.getNombre());
 			}
 			
 			if (editar) {
-				request.setAttribute("perroEditar", perro);
+				try {
+					dao.update(perro);
+					request.setAttribute("perroEditar", perro);
+				} catch (Exception e) {
+					log.warn("No se ha podido actualizar el perro");
+				}
 			}
 			
 		}else {
@@ -129,33 +137,36 @@ public class PerrosController extends HttpServlet {
 		String imagen = request.getParameter("imagen");
 		
 				
-		log.trace("crear perro");
+		
 		if (id>0) {
 			log.trace("editamos el perro");
-			Perro perro = null;
-			for (Perro p : perros) {
-				if (p.getId()==id) {
-					perro=p;
-					break;
-				}
-			}
+			Perro perro = new Perro();
+		
 			perro.setNombre(nombre);
 			perro.setFoto(imagen);
-			mensaje = "Perro modificado con éxito";
+			
+			try {
+				dao.update(perro);
+				mensaje = "Perro modificado con éxito";
+			} catch (Exception e) {
+				mensaje = "No se pudo modificar el perro";
+			}
+			
 			
 		}else {
 			log.trace("Creamos un nuevo perro");
 			Perro p = new Perro();
-			p.setId(indice);
 			p.setNombre(nombre);
 			p.setFoto(imagen);
-			p.setId(indice);
-			indice++;
+			try {
+				dao.create(p);
+				mensaje = "Gracias por añadir un nuevo perro";
+			} catch (Exception e) {
+				mensaje="No se puede crear el perro";
+			}
 			
-			mensaje = "Gracias por sacrificar un nuevo perro";
+		
 			
-			log.trace("añadimos el perro a la lista");
-			perros.add(p);
 			
 		}
 		
