@@ -141,7 +141,7 @@ public class PerrosController extends HttpServlet {
 		if (id>0) {
 			log.trace("editamos el perro");
 			Perro perro = new Perro();
-		
+			perro.setId(id);
 			perro.setNombre(nombre);
 			perro.setFoto(imagen);
 			
